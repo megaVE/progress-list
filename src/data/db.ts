@@ -4,7 +4,7 @@ export const database: DexieDatabase = {
     name: 'hoi4database',
     schema: [
         {
-            countries: '++id, name, tag',
+            countries: '++id, tag, originalName, modName, modLeader',
         },
     ],
 };

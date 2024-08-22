@@ -1,13 +1,14 @@
 import { saveAs } from 'file-saver';
 
+import { jsonToBlob } from './json-to-blob';
+
 interface exportJsonParams {
     name: string;
-    content: object;
+    content: JSON | Blob;
 }
 
-export function exportJson({ name, content }: exportJsonParams) {
-    const jsonContent = JSON.stringify(content);
-    const blob = new Blob([jsonContent], { type: 'application/json' });
+export function exportJson({ name, content }: exportJsonParams): void {
+    const blob = content instanceof Blob ? content : jsonToBlob(content);
 
     saveAs(blob, `${name}.json`);
 }

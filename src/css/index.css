@@ -1,0 +1,22 @@
+@import url("./classes.css");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Removing Input Focus Outline */
+textarea:focus, input:focus {
+  outline: none;
+}
+
+/* Removing Number Input Style */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
