@@ -12,7 +12,7 @@ export function CountryPage({}: CountryPageProps) {
     const { tag: countryTag } = useParams();
     const tag = countryTag?.toUpperCase();
 
-    const { dexie } = useDexie(database);
+    const { dexie, isLoading, error } = useDexie(database);
 
     const [countryObject, setCountryObject] = useState<
         Country | null | undefined
@@ -26,7 +26,7 @@ export function CountryPage({}: CountryPageProps) {
                 query: { field: 'tag', value: tag },
             });
 
-            setCountryObject(countryInfo || null);
+            setCountryObject(countryInfo);
         };
         getCountryInfo();
     }, []);
@@ -42,8 +42,8 @@ export function CountryPage({}: CountryPageProps) {
                         {key}: {countryObject[key]}
                     </p>
                 ))}
-            {countryObject === null && <p>Loading...</p>}
-            {countryObject === undefined && <p>Country not found</p>}
+            {countryObject === null && isLoading && <p>Loading...</p>}
+            {(countryObject === undefined || error) && <p>Country not found</p>}
         </>
     );
 }

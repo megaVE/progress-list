@@ -5,6 +5,7 @@ import { useDexie } from '../../hooks/use-dexie';
 import { database } from '../../data/db';
 import { useEffect, useRef, useState } from 'react';
 import { useFileReader } from '../../hooks/use-file-reader';
+import { Button } from '../elements/button';
 
 export function Navbar() {
     const inputFileRef = useRef<HTMLInputElement>(null);
@@ -48,12 +49,12 @@ export function Navbar() {
 
     return (
         <nav className="border border-b-black py-2 px-4 flex items-center space-x-2">
-            <button className="btn" onClick={handleExport}>
+            <Button onClick={handleExport}>
                 <IconAndTextRenderer icon={<LuArrowBigDown />}>
                     Export Database
                 </IconAndTextRenderer>
-            </button>
-            <button className="btn" onClick={handleImport}>
+            </Button>
+            <Button onClick={handleImport}>
                 <IconAndTextRenderer icon={<LuArrowBigUp />}>
                     Import Database
                 </IconAndTextRenderer>
@@ -63,7 +64,7 @@ export function Navbar() {
                     ref={inputFileRef}
                     onChange={handleLoadedFile}
                 />
-            </button>
+            </Button>
         </nav>
     );
 }

@@ -12,6 +12,7 @@ import { CountriesList } from '../../components/countries-list';
 import { Navbar } from '../../components/layout/navbar';
 import { IconAndTextRenderer } from '../../components/rendering/icon-and-text-renderer';
 import { SearchBar } from './components/search-bar';
+import { Button } from '../../components/elements/button';
 
 export function MainPage({}: MainPageProps) {
     const { dexie } = useDexie(database);
@@ -40,8 +41,8 @@ export function MainPage({}: MainPageProps) {
             <Header />
             {/* Create Country Bar */}
             <div className="w-full p-4 border border-b-black">
-                <button
-                    className={`${isCreatingCountry ? 'bg-gray-200' : 'bg-green-400'} btn min-w-40`}
+                <Button
+                    className={`${isCreatingCountry ? 'bg-gray-200' : 'bg-green-400'} min-w-40`}
                     onClick={() => setIsCreatingCountry(state => !state)}
                 >
                     <div className="flex items-center gap-1">
@@ -55,7 +56,7 @@ export function MainPage({}: MainPageProps) {
                             </IconAndTextRenderer>
                         )}
                     </div>
-                </button>
+                </Button>
                 {isCreatingCountry && (
                     <NewCountryForm dexieCreate={dexie.create} />
                 )}
