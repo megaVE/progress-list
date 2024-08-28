@@ -5,12 +5,13 @@ import { useDexie } from '../../hooks/use-dexie';
 import { database } from '../../data/db';
 import { useEffect, useState } from 'react';
 import { NewCountryForm } from './components/new-country-form';
-import { Country } from '../../types/country';
+import { Country } from '../../@types/zod/country';
 
 import { LuPlus, LuMinus } from 'react-icons/lu';
 import { CountriesList } from '../../components/countries-list';
 import { Navbar } from '../../components/layout/navbar';
 import { IconAndTextRenderer } from '../../components/rendering/icon-and-text-renderer';
+import { SearchBar } from './components/search-bar';
 
 export function MainPage({}: MainPageProps) {
     const { dexie } = useDexie(database);
@@ -60,11 +61,16 @@ export function MainPage({}: MainPageProps) {
                 )}
             </div>
             <Navbar />
-            {countriesList ? (
-                <CountriesList countriesList={countriesList} />
-            ) : (
-                <p>Nothing</p>
-            )}
+            <div className="p-2">
+                {countriesList ? (
+                    <>
+                        <SearchBar />
+                        <CountriesList countriesList={countriesList} />
+                    </>
+                ) : (
+                    <p>Nothing</p>
+                )}
+            </div>
         </>
     );
 }

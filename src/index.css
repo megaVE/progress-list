@@ -5,11 +5,15 @@
 /* Removing Number Input Style */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+    -webkit-appearance: none;
+    margin: 0;
 }
 
-input[type=number] {
-  -moz-appearance: textfield;
-  appearance: textfield;
+input[type='number'] {
+    -moz-appearance: textfield;
+    appearance: textfield;
 }
+
+/* ::selection {
+  @apply bg-blue-950 text-gray-100
+} */

@@ -1,19 +1,27 @@
 import styles from './new-country-form.module.css';
 
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { Country } from '../../../types/country';
-import { DexieCreate } from '../../../types/use-dexie';
+import { DexieCreate } from '../../../@types/use-dexie';
+import { zodResolver } from '@hookform/resolvers/zod';
+import {
+    NewCountry,
+    NewCountryZodSchema,
+} from '../../../@types/zod/new-country';
+import { Country, CountryZodSchema } from '../../../@types/zod/country';
 
 interface NewCountryFormProps {
     dexieCreate: DexieCreate;
 }
 
 export function NewCountryForm({ dexieCreate }: NewCountryFormProps) {
-    const { register, handleSubmit } = useForm<Country>();
+    const { register, handleSubmit } = useForm<NewCountry>({
+        resolver: zodResolver(NewCountryZodSchema),
+    });
 
-    const onSubmit: SubmitHandler<Country> = async data => {
-        console.log(data);
-        await dexieCreate('countries', data);
+    const onSubmit: SubmitHandler<NewCountry> = async data => {
+        const newCountryObject = CountryZodSchema.parse(data);
+
+        await dexieCreate<Country>('countries', newCountryObject);
     };
 
     return (

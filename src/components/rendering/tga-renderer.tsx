@@ -1,5 +1,5 @@
 import TGA from 'tga-js';
-import { TGAFile } from '../../types/files/tga';
+import { TGAFile } from '../../@types/files/tga';
 import { HtmlElementRenderer } from './html-element-renderer';
 import { useEffect, useState } from 'react';
 const tga = new TGA();

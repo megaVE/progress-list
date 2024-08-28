@@ -1,9 +1,8 @@
 import Dexie from 'dexie';
 
-export type DexieCreate = (
-    tableName: string,
-    newEntity: object,
-) => Promise<void>;
+import { z } from 'zod';
+
+export type DexieCreate = <T>(tableName: string, newEntity: T) => Promise<void>;
 
 // export type DexieRead
 

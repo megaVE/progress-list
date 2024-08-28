@@ -3,7 +3,7 @@ import { saveAs } from 'file-saver';
 
 import Dexie, { Collection, Table } from 'dexie';
 import { exportDB, importInto } from 'dexie-export-import';
-import { DexieDatabase } from '../types/dexie-database';
+import { DexieDatabase } from '../@types/dexie-database';
 import {
     DexieCreate,
     DexieDelete,
@@ -11,7 +11,7 @@ import {
     DexieImport,
     // DexieRead,
     DexieUpdate,
-} from '../types/use-dexie';
+} from '../@types/use-dexie';
 import { jsonToBlob } from '../utils/json-to-blob';
 
 export function useDexie(databaseInfo: DexieDatabase) {
@@ -58,9 +58,17 @@ export function useDexie(databaseInfo: DexieDatabase) {
         );
     };
 
+    // TODO
     const dexieRead = async <T,>(
         tableName: string,
-        { sort }: { sort?: { field: string; order?: 'asc' | 'desc' } } = {},
+        {
+            sort,
+        }: {
+            sort?: {
+                field: string;
+                order?: 'asc' | 'desc';
+            };
+        },
     ): Promise<Array<T> | undefined> => {
         let readingPromise: Table | Collection = db.table(tableName);
 
@@ -76,6 +84,7 @@ export function useDexie(databaseInfo: DexieDatabase) {
             readingPromise.toArray(),
             `Error while reading ${tableName}.`,
         );
+
         return queryResult;
     };
 
@@ -101,6 +110,23 @@ export function useDexie(databaseInfo: DexieDatabase) {
             deletionPromise,
             `Error deleting ${entityId} from ${tableName}`,
         );
+    };
+
+    const dexieFind = async <T,>(
+        tableName: string,
+        { query }: { query: { field: string; value: any } },
+    ): Promise<T | undefined> => {
+        let findingPromise: Table | Collection = db
+            .table(tableName)
+            .where(query.field)
+            .equals(query.value);
+
+        const queryResult = await handleDexieOperation(
+            findingPromise.first(),
+            `Error finding entity from ${tableName}`,
+        );
+
+        return queryResult;
     };
 
     // IMPORT / EXPORT DB
@@ -147,6 +173,7 @@ export function useDexie(databaseInfo: DexieDatabase) {
             read: dexieRead,
             update: dexieUpdate,
             delete: dexieDelete,
+            find: dexieFind,
         },
         importDataBase: dexieImport,
         exportDataBase: dexieExport,
