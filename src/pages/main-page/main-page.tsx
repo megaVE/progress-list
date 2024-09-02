@@ -1,6 +1,3 @@
-interface MainPageProps {}
-
-import { Header } from '../../components/layout/header';
 import { useDexie } from '../../hooks/use-dexie';
 import { database } from '../../data/db';
 import { useEffect, useState } from 'react';
@@ -13,11 +10,15 @@ import { Navbar } from '../../components/layout/navbar';
 import { IconAndTextRenderer } from '../../components/rendering/icon-and-text-renderer';
 import { SearchBar } from './components/search-bar';
 import { Button } from '../../components/elements/button';
+import { PageTemplate } from '../../components/templates/page-template';
+
+export interface MainPageProps {}
 
 export function MainPage({}: MainPageProps) {
-    const { dexie } = useDexie(database);
+    const { dexie, isLoading, error } = useDexie(database);
 
     const [isCreatingCountry, setIsCreatingCountry] = useState<boolean>(false);
+    const [query, setQuery] = useState<string>('');
     const [countriesList, setCountriesList] = useState<Country[] | null>(null);
 
     useEffect(() => {
@@ -36,9 +37,12 @@ export function MainPage({}: MainPageProps) {
         asyncFunc();
     }, [database]);
 
+    const filteredCountryList = countriesList?.filter(country =>
+        country.tag.includes(query),
+    );
+
     return (
-        <>
-            <Header />
+        <PageTemplate hasDefaultClassName={false}>
             {/* Create Country Bar */}
             <div className="w-full p-4 border border-b-black">
                 <Button
@@ -63,15 +67,15 @@ export function MainPage({}: MainPageProps) {
             </div>
             <Navbar />
             <div className="p-2">
-                {countriesList ? (
+                {isLoading && <p>Loading available countries...</p>}
+                {error && <p>Error loading countries</p>}
+                {filteredCountryList && (
                     <>
-                        <SearchBar />
-                        <CountriesList countriesList={countriesList} />
+                        <SearchBar queryState={[query, setQuery]} />
+                        <CountriesList countriesList={filteredCountryList} />
                     </>
-                ) : (
-                    <p>Nothing</p>
                 )}
             </div>
-        </>
+        </PageTemplate>
     );
 }

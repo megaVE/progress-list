@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 
-interface HtmlElementRendererProps extends React.HTMLProps<HTMLDivElement> {
+export interface HtmlElementRendererProps
+    extends React.HTMLProps<HTMLDivElement> {
     htmlElement: HTMLElement | null;
 }
 

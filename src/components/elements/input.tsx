@@ -1,7 +1,9 @@
 import { InputHTMLAttributes } from 'react';
 
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-    setValue: (newValue: any) => void;
+export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+    setValue:
+        | ((newValue: any) => void)
+        | ((newValue: any, valueName: string) => void);
 }
 
 export function Input({
@@ -17,7 +19,7 @@ export function Input({
             name={name}
             id={name}
             value={value}
-            onChange={e => setValue(e.target.value)}
+            onChange={e => setValue(e.target.value, e.target.name)}
             {...props}
         />
     );

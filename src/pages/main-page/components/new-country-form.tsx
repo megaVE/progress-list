@@ -9,7 +9,7 @@ import {
 } from '../../../@types/zod/new-country';
 import { Country, CountryZodSchema } from '../../../@types/zod/country';
 
-interface NewCountryFormProps {
+export interface NewCountryFormProps {
     dexieCreate: DexieCreate;
 }
 
@@ -48,7 +48,7 @@ export function NewCountryForm({ dexieCreate }: NewCountryFormProps) {
                         type="submit"
                         className="font-semibold bg-gray-600 text-white py-1 duration-200 hover:bg-gray-700"
                     >
-                        Carregar
+                        Create
                     </button>
                 </div>
                 <div className={styles.column}>

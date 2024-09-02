@@ -10,7 +10,7 @@ import Overlay from '../assets/hoi4-flag-overlay.png';
 import { IconAndTextRenderer } from './rendering/icon-and-text-renderer';
 import { CategoryList } from '../@types/zod/category-list';
 
-interface CountryCardProps {
+export interface CountryCardProps {
     country: Country;
 }
 

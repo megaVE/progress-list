@@ -1,8 +1,8 @@
 import { ReactNode } from 'react';
 
-interface IconAndTextRendererProps {
-    children: ReactNode;
-    icon: ReactNode;
+export interface IconAndTextRendererProps {
+    children?: ReactNode;
+    icon?: ReactNode;
     isReverse?: boolean;
     gap?: number;
 }

@@ -5,8 +5,12 @@ import { useEffect, useState } from 'react';
 import { Country } from '../../@types/zod/country';
 import { Header } from '../../components/layout/header';
 import { TgaRenderer } from '../../components/rendering/tga-renderer';
+import { Button } from '../../components/elements/button';
+import { IconAndTextRenderer } from '../../components/rendering/icon-and-text-renderer';
 
-interface CountryPageProps {}
+import { LuArrowBigLeft } from 'react-icons/lu';
+
+export interface CountryPageProps {}
 
 export function CountryPage({}: CountryPageProps) {
     const { tag: countryTag } = useParams();
@@ -34,16 +38,26 @@ export function CountryPage({}: CountryPageProps) {
     return (
         <>
             <Header />
-            {tag && <TgaRenderer filePath={`../../assets/flags/${tag}.tga`} />}
-            <div></div>
-            {countryObject &&
-                Object.keys(countryObject).map(key => (
-                    <p>
-                        {key}: {countryObject[key]}
-                    </p>
-                ))}
-            {countryObject === null && isLoading && <p>Loading...</p>}
-            {(countryObject === undefined || error) && <p>Country not found</p>}
+            <div>
+                <Button to="/">
+                    <IconAndTextRenderer icon={<LuArrowBigLeft />}>
+                        Return
+                    </IconAndTextRenderer>
+                </Button>
+                {tag && (
+                    <TgaRenderer filePath={`../../assets/flags/${tag}.tga`} />
+                )}
+                {countryObject &&
+                    Object.keys(countryObject).map(key => (
+                        <p>
+                            {key}: {countryObject[key]}
+                        </p>
+                    ))}
+                {countryObject === null && isLoading && <p>Loading...</p>}
+                {(countryObject === undefined || error) && (
+                    <p>Country not found</p>
+                )}
+            </div>
         </>
     );
 }

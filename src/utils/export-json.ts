@@ -2,7 +2,7 @@ import { saveAs } from 'file-saver';
 
 import { jsonToBlob } from './json-to-blob';
 
-interface exportJsonParams {
+export interface exportJsonParams {
     name: string;
     content: JSON | Blob;
 }

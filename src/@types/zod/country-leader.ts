@@ -4,9 +4,8 @@ import { CharacterZodSchema } from './character';
 import { IdeologyZodSchema } from './ideology';
 
 export const CountryLeaderZodSchema = CharacterZodSchema.extend({
-    ideologies: z.array(IdeologyZodSchema),
-    // isArmy: z.boolean().default(false),
-    // isAdvisor: z.boolean().default(false),
+    ideaId: z.string().nullable().default(null),
+    ideologies: z.array(IdeologyZodSchema).default([]),
 });
 
 export type CountryLeader = z.infer<typeof CountryLeaderZodSchema>;

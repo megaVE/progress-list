@@ -1,14 +1,18 @@
-import { useState } from 'react';
+import { StateArray } from '../../../@types/state-array';
 import { Input } from '../../../components/elements/input';
 
 import { LuSearch } from 'react-icons/lu';
 
-export function SearchBar() {
-    const [query, setQuery] = useState<string>('');
+export interface SearchBarProps {
+    queryState: StateArray<string>;
+}
+
+export function SearchBar({ queryState }: SearchBarProps) {
+    const [query, setQuery] = queryState;
 
     return (
         <div className="p-2 max-w-min">
-            <div className="flex bg-gray-50 border border-black rounded-sm p-1">
+            <div className="flex space-x-1 bg-gray-50 border border-black rounded-sm p-1">
                 <Input
                     className="bg-transparent"
                     name="query"
@@ -16,6 +20,7 @@ export function SearchBar() {
                     placeholder="Search..."
                     setValue={setQuery}
                 />
+                <div className="w-px h-auto bg-black" />
                 <button className="text-xl focus:outline-gray-200">
                     <LuSearch />
                 </button>

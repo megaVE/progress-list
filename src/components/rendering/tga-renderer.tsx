@@ -4,7 +4,7 @@ import { HtmlElementRenderer } from './html-element-renderer';
 import { useEffect, useState } from 'react';
 const tga = new TGA();
 
-interface TgaRendererProps extends React.HTMLProps<HTMLDivElement> {
+export interface TgaRendererProps extends React.HTMLProps<HTMLDivElement> {
     filePath: TGAFile | null;
 }
 

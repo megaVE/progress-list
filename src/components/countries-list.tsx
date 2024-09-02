@@ -1,8 +1,8 @@
-import { Country } from '../@types/country';
+import { Country } from '../@types/zod/country';
 
 import { CountryCard } from './country-card';
 
-interface CountriesListProps {
+export interface CountriesListProps {
     countriesList: Country[];
 }
 

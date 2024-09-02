@@ -1,4 +1,4 @@
-import { LuArrowBigDown, LuArrowBigUp } from 'react-icons/lu';
+import { LuArrowBigDown, LuArrowBigUp, LuTrash2 } from 'react-icons/lu';
 import { IconAndTextRenderer } from '../rendering/icon-and-text-renderer';
 
 import { useDexie } from '../../hooks/use-dexie';
@@ -7,7 +7,9 @@ import { useEffect, useRef, useState } from 'react';
 import { useFileReader } from '../../hooks/use-file-reader';
 import { Button } from '../elements/button';
 
-export function Navbar() {
+export interface NavbarProps {}
+
+export function Navbar({}: NavbarProps) {
     const inputFileRef = useRef<HTMLInputElement>(null);
 
     const { exportDataBase, importDataBase } = useDexie(database);
@@ -64,6 +66,11 @@ export function Navbar() {
                     ref={inputFileRef}
                     onChange={handleLoadedFile}
                 />
+            </Button>
+            <Button className="red-theme">
+                <IconAndTextRenderer icon={<LuTrash2 />}>
+                    Delete Database
+                </IconAndTextRenderer>
             </Button>
         </nav>
     );
