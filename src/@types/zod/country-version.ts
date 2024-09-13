@@ -8,5 +8,3 @@ export const CountryVersionZodSchema = z.object({
     ideology: IdeologyZodSchema,
     hasCustomFlag: z.boolean().default(false),
 });
-
-export type CountryVersion = z.infer<typeof CountryVersionZodSchema>;

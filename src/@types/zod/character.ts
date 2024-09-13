@@ -5,5 +5,3 @@ export const CharacterZodSchema = z.object({
     modName: z.string().nullable().default(null),
     description: z.string().default(''),
 });
-
-export type Character = z.infer<typeof CharacterZodSchema>;

@@ -2,18 +2,19 @@ import styles from './new-country-form.module.css';
 
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { DexieCreate } from '../../../@types/use-dexie';
+import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import {
-    NewCountry,
-    NewCountryZodSchema,
-} from '../../../@types/zod/new-country';
-import { Country, CountryZodSchema } from '../../../@types/zod/country';
+import { NewCountryZodSchema } from '../../../@types/zod/new-country';
+import { CountryZodSchema } from '../../../@types/zod/country';
 
 export interface NewCountryFormProps {
     dexieCreate: DexieCreate;
 }
 
 export function NewCountryForm({ dexieCreate }: NewCountryFormProps) {
+    type Country = z.infer<typeof CountryZodSchema>;
+    type NewCountry = z.infer<typeof NewCountryZodSchema>;
+
     const { register, handleSubmit } = useForm<NewCountry>({
         resolver: zodResolver(NewCountryZodSchema),
     });

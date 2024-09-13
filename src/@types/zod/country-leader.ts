@@ -7,5 +7,3 @@ export const CountryLeaderZodSchema = CharacterZodSchema.extend({
     ideaId: z.string().nullable().default(null),
     ideologies: z.array(IdeologyZodSchema).default([]),
 });
-
-export type CountryLeader = z.infer<typeof CountryLeaderZodSchema>;

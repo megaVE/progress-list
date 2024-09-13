@@ -11,5 +11,3 @@ export const CharacterRoleZodSchema = z.enum([
     'chief_of_airforce',
     'military',
 ]);
-
-export type CharacterRole = z.infer<typeof CharacterRoleZodSchema>;

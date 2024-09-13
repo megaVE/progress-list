@@ -8,5 +8,3 @@ export const NewCountryZodSchema = z.object({
     //Leader
     modLeader: z.string().nullable().default(null),
 });
-
-export type NewCountry = z.infer<typeof NewCountryZodSchema>;

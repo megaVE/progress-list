@@ -6,5 +6,3 @@ export const IdeologyZodSchema = z.enum([
     'communism',
     'neutrality',
 ]);
-
-export type Ideology = z.infer<typeof IdeologyZodSchema>;

@@ -10,5 +10,3 @@ export const ArmyVoiceZodSchema = z.object({
         .nullable()
         .default(null),
 });
-
-export type ArmyVoice = z.infer<typeof ArmyVoiceZodSchema>;

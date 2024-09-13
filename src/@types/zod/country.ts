@@ -43,5 +43,3 @@ export const CountryZodSchema = NewCountryZodSchema.extend({
         aceList: z.array(AceZodSchema),
     }).default({ aceList: [] }),
 });
-
-export type Country = z.infer<typeof CountryZodSchema>;
